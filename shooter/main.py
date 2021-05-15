@@ -58,7 +58,7 @@ class GameLogic(Game):
                 self.landscapes.add(Ground(x, y))
                 if obj == '-':
                     self.obstacles.add(Stone(x, y))
-                elif obj == 'o':
+                elif obj == '+':
                     self.obstacles.add(Palm(x, y))
                 elif obj == 'P':
                     self.create_player(x, y)
