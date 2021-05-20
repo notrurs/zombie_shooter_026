@@ -7,7 +7,7 @@ from game_object.entity.zombie import Zombie
 from game_object.landscapes.stone import Stone
 from game_object.landscapes.ground import Ground
 from game_object.landscapes.palm import Palm
-from game_object.landscapes.cactus import Cactus
+from shooter.game_object.traps.cactus import Cactus
 
 from config import WINDOW_WIDTH
 from config import WINDOW_HEIGHT
