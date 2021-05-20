@@ -33,15 +33,15 @@ ZOMBIE_HEALTH = 2000
 ZOMBIE_DAMAGE = 40
 ZOMBIE_ATTACK_DELAY = 1
 
-# Настройка повреждения от шипов кактуса
-CACTUS_ATTACK_DELAY = 1
-CACTUS_SPIKE_DAMAGE = 10
-
 # Настройка объектов игрового окружения
 LANDSCAPE_GROUND = _IMAGES_DIR / 'ground.png'
 LANDSCAPE_STONE = _IMAGES_DIR / 'stone.png'
 LANDSCAPE_PALM = _IMAGES_DIR / 'palm-1.png'
-LANDSCAPE_CACTUS = _IMAGES_DIR / 'cactus.png'
+
+# Настройка объектов ловушек
+TRAP_CACTUS = _IMAGES_DIR / 'cactus.png'
+CACTUS_ATTACK_DELAY = 1
+CACTUS_SPIKE_DAMAGE = 10
 
 # Список уровней
 LEVEL_1 = _LEVELS_DIR / 'level.txt'
