@@ -27,6 +27,9 @@ from config import ZOMBIE_HEALTH
 from config import ZOMBIE_DAMAGE
 from config import ZOMBIE_ATTACK_DELAY
 from config import LEVEL_1
+from config import CACTUS_IMG
+from config import CACTUS_SPIKE_DAMAGE
+from config import CACTUS_ATTACK_DELAY
 
 
 class GameLogic(Game):
@@ -62,7 +65,7 @@ class GameLogic(Game):
                 elif obj == '+':
                     self.obstacles.add(Palm(x, y))
                 elif obj == '*':
-                    self.obstacles.add(Cactus(x, y))
+                    self.create_cactus(x, y)
                 elif obj == 'P':
                     self.create_player(x, y)
                 elif obj == 'Z':
@@ -97,6 +100,11 @@ class GameLogic(Game):
         """Метод, создающий врагов"""
         zombie = Zombie(x, y, ZOMBIE_IMAGE, ZOMBIE_SPEED, ZOMBIE_AGR_RANGE, ZOMBIE_HEALTH, ZOMBIE_DAMAGE, ZOMBIE_ATTACK_DELAY)
         self.enemies.add(zombie)
+
+    def create_cactus(self, x, y):
+        """Метод, создающий ловушку"""
+        cactus = Cactus(x, y, CACTUS_IMG, CACTUS_SPIKE_DAMAGE, CACTUS_ATTACK_DELAY)
+        self.traps.add(cactus)
 
     def handle_bullets(self):
         """Обработчик создания пуль"""
