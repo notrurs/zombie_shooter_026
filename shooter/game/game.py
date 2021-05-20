@@ -58,7 +58,7 @@ class Game:
         """Главный игровой метод. Содержит бесконечный цикл, внутри которого работает всё."""
         while True:
             self.handle_events()
-            self.game_objects = [*self.landscapes, *self.obstacles, *self.enemies, *self.player_objects, *self.player_bullets]
+            self.game_objects = [*self.landscapes, *self.obstacles, *self.traps, *self.enemies, *self.player_objects, *self.player_bullets]
 
             self.surface.fill(self.background)
             self.update()
