@@ -32,6 +32,7 @@ class Game:
         self.enemies = pygame.sprite.Group()
         self.landscapes = pygame.sprite.Group()
         self.obstacles = pygame.sprite.Group()
+        self.traps = pygame.sprite.Group()
         self.clock = pygame.time.Clock()
         self.keydown_handlers = defaultdict(list)  # {'KEY_W': [Player.handle_keydown, Player2.handle_keydown], 'KEY_S': [Player.handle_keydown]} Player.handle_keydown()
         self.keyup_handlers = defaultdict(list)
