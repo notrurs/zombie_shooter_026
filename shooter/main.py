@@ -6,6 +6,7 @@ from game_object.entity.bullet import Bullet
 from game_object.entity.zombie import Zombie
 from game_object.landscapes.stone import Stone
 from game_object.landscapes.ground import Ground
+from game_object.landscapes.water import Water
 from game_object.landscapes.palm import Palm
 
 from config import WINDOW_WIDTH
@@ -58,6 +59,8 @@ class GameLogic(Game):
                 self.landscapes.add(Ground(x, y))
                 if obj == '-':
                     self.obstacles.add(Stone(x, y))
+                elif obj == 'w':
+                    self.obstacles.add(Water(x, y))
                 elif obj == '+':
                     self.obstacles.add(Palm(x, y))
                 elif obj == 'P':
@@ -75,7 +78,7 @@ class GameLogic(Game):
         # Список со всеми клавишами на клавиатуре, которые могут быть задействованы игроком
         keys = [pygame.K_w, pygame.K_a, pygame.K_s, pygame.K_d]
 
-        # Список со всеми событиями мышки, которые могут быть задейстованы игроком
+        # Список со всеми событиями мышки, которые могут быть задействованы игроком
         mouse_events = [pygame.MOUSEMOTION, pygame.MOUSEBUTTONDOWN, pygame.MOUSEBUTTONUP]
 
         # Добавляем все клавиши в соответствующие словари

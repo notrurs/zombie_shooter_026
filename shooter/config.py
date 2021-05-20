@@ -35,6 +35,7 @@ ZOMBIE_ATTACK_DELAY = 1
 
 # Настройка объектов игрового окружения
 LANDSCAPE_GROUND = _IMAGES_DIR / 'ground.png'
+LANDSCAPE_WATER = _IMAGES_DIR / 'water.png'
 LANDSCAPE_STONE = _IMAGES_DIR / 'stone.png'
 LANDSCAPE_PALM = _IMAGES_DIR / 'palm-1.png'
 
