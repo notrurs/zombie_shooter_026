@@ -177,6 +177,27 @@ class GameLogic(Game):
                 elif enemy.rect.collidepoint(*obstacle.rect.midbottom) and enemy.moving_up:
                     enemy.block_moving('up')
 
+    def handle_player_with_cactus_collision(self):
+        """Обработчик соприкосновения игрока с кактусом"""
+        touched_traps = pygame.sprite.spritecollide(self.player, self.traps, False)
+
+        if not touched_traps:
+            self.player.block_moving(None)
+
+        for trap in touched_traps:
+            if self.player.rect.collidepoint(*trap.rect.midleft) and self.player.moving_right:
+                self.player.block_moving('right')
+            elif self.player.rect.collidepoint(*trap.rect.midright) and self.player.moving_left:
+                self.player.block_moving('left')
+            elif self.player.rect.collidepoint(*trap.rect.midtop) and self.player.moving_down:
+                self.player.block_moving('down')
+            elif self.player.rect.collidepoint(*trap.rect.midbottom) and self.player.moving_up:
+                self.player.block_moving('up')
+
+        collide_trap = pygame.sprite.spritecollideany(self.player, self.traps)
+        if collide_trap:
+            collide_trap.deal_damage(self.player)
+
     def update(self):
         """Запускает все хендлеры (обработчики) и вызывает update родителя"""
         self.handle_bullets()
@@ -186,6 +207,7 @@ class GameLogic(Game):
         self.handle_player_with_obstacle_collision()
         self.handle_bullets_with_obstacles_collision()
         self.handle_enemy_with_obstacle_collision()
+        self.handle_player_with_cactus_collision()
         super().update()
 
 
