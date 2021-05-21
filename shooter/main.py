@@ -7,6 +7,7 @@ from game_object.entity.zombie import Zombie
 from game_object.landscapes.stone import Stone
 from game_object.landscapes.ground import Ground
 from game_object.landscapes.palm import Palm
+from game_object.landscapes.bonefire import Bonefire
 
 from config import WINDOW_WIDTH
 from config import WINDOW_HEIGHT
@@ -26,6 +27,7 @@ from config import ZOMBIE_HEALTH
 from config import ZOMBIE_DAMAGE
 from config import ZOMBIE_ATTACK_DELAY
 from config import LEVEL_1
+from config import LEVEL_2
 
 
 class GameLogic(Game):
@@ -60,6 +62,8 @@ class GameLogic(Game):
                     self.obstacles.add(Stone(x, y))
                 elif obj == '+':
                     self.obstacles.add(Palm(x, y))
+                elif obj == '*':
+                    self.obstacles.add(Bonefire(x, y))
                 elif obj == 'P':
                     self.create_player(x, y)
                 elif obj == 'Z':
