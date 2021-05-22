@@ -27,7 +27,6 @@ from config import ZOMBIE_HEALTH
 from config import ZOMBIE_DAMAGE
 from config import ZOMBIE_ATTACK_DELAY
 from config import LEVEL_1
-from config import LEVEL_2
 
 
 class GameLogic(Game):
@@ -62,7 +61,7 @@ class GameLogic(Game):
                     self.obstacles.add(Stone(x, y))
                 elif obj == '+':
                     self.obstacles.add(Palm(x, y))
-                elif obj == '*':
+                elif obj == '^':
                     self.obstacles.add(Bonefire(x, y))
                 elif obj == 'P':
                     self.create_player(x, y)
