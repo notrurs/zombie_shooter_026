@@ -6,8 +6,10 @@ from game_object.entity.bullet import Bullet
 from game_object.entity.zombie import Zombie
 from game_object.landscapes.stone import Stone
 from game_object.landscapes.ground import Ground
+from game_object.landscapes.water import Water
 from game_object.landscapes.palm import Palm
 from game_object.landscapes.bonefire import Bonefire
+from game_object.traps.cactus import Cactus
 
 from config import WINDOW_WIDTH
 from config import WINDOW_HEIGHT
@@ -26,6 +28,9 @@ from config import ZOMBIE_AGR_RANGE
 from config import ZOMBIE_HEALTH
 from config import ZOMBIE_DAMAGE
 from config import ZOMBIE_ATTACK_DELAY
+from config import CACTUS_IMG
+from config import CACTUS_SPIKE_DAMAGE
+from config import CACTUS_ATTACK_DELAY
 from config import LEVEL_1
 
 
@@ -59,10 +64,14 @@ class GameLogic(Game):
                 self.landscapes.add(Ground(x, y))
                 if obj == '-':
                     self.obstacles.add(Stone(x, y))
+                elif obj == 'w':
+                    self.obstacles.add(Water(x, y))
                 elif obj == '+':
                     self.obstacles.add(Palm(x, y))
                 elif obj == '^':
                     self.obstacles.add(Bonefire(x, y))
+                elif obj == '*':
+                    self.create_cactus(x, y)
                 elif obj == 'P':
                     self.create_player(x, y)
                 elif obj == 'Z':
@@ -78,7 +87,7 @@ class GameLogic(Game):
         # Список со всеми клавишами на клавиатуре, которые могут быть задействованы игроком
         keys = [pygame.K_w, pygame.K_a, pygame.K_s, pygame.K_d]
 
-        # Список со всеми событиями мышки, которые могут быть задейстованы игроком
+        # Список со всеми событиями мышки, которые могут быть задействованы игроком
         mouse_events = [pygame.MOUSEMOTION, pygame.MOUSEBUTTONDOWN, pygame.MOUSEBUTTONUP]
 
         # Добавляем все клавиши в соответствующие словари
@@ -97,6 +106,11 @@ class GameLogic(Game):
         """Метод, создающий врагов"""
         zombie = Zombie(x, y, ZOMBIE_IMAGE, ZOMBIE_SPEED, ZOMBIE_AGR_RANGE, ZOMBIE_HEALTH, ZOMBIE_DAMAGE, ZOMBIE_ATTACK_DELAY)
         self.enemies.add(zombie)
+
+    def create_cactus(self, x, y):
+        """Метод, создающий ловушку"""
+        cactus = Cactus(x, y, CACTUS_IMG, CACTUS_SPIKE_DAMAGE, CACTUS_ATTACK_DELAY)
+        self.obstacles.add(cactus)
 
     def handle_bullets(self):
         """Обработчик создания пуль"""
@@ -145,10 +159,18 @@ class GameLogic(Game):
                 self.player.block_moving('down')
             elif self.player.rect.collidepoint(*obstacle.rect.midbottom) and self.player.moving_up:
                 self.player.block_moving('up')
+            if isinstance(obstacle, Cactus):
+                obstacle.deal_damage(self.player)
 
     def handle_bullets_with_obstacles_collision(self):
         """Обработчик соприкосновения пули с препятствием"""
-        pygame.sprite.groupcollide(self.player_bullets, self.obstacles, True, False)
+        # pygame.sprite.groupcollide(self.player_bullets, self.obstacles, True, False)
+
+        collide_dict = pygame.sprite.groupcollide(self.player_bullets, self.obstacles, False, False)
+        for bullet, obstacles in collide_dict.items():
+            for obstacle in obstacles:
+                if not isinstance(obstacle, Water):
+                    bullet.kill()
 
     def handle_enemy_with_obstacle_collision(self):
         """Обработчик соприкосновения врага с препятствием"""
@@ -168,6 +190,8 @@ class GameLogic(Game):
                     enemy.block_moving('down')
                 elif enemy.rect.collidepoint(*obstacle.rect.midbottom) and enemy.moving_up:
                     enemy.block_moving('up')
+                if isinstance(obstacle, Cactus):
+                    obstacle.deal_damage(enemy)
 
     def update(self):
         """Запускает все хендлеры (обработчики) и вызывает update родителя"""
