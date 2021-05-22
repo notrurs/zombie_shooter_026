@@ -153,7 +153,7 @@ class GameLogic(Game):
         collide_dict = pygame.sprite.groupcollide(self.player_bullets, self.obstacles, False, False)
         for bullet, obstacles in collide_dict.items():
             for obstacle in obstacles:
-                if True:  # Пока не разобрался, как выделить спрайты воды (Water), чтобы пули пролетали над водой
+                if not isinstance(obstacle, Water):
                     bullet.kill()
 
     def handle_enemy_with_obstacle_collision(self):
