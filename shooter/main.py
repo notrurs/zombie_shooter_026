@@ -8,6 +8,7 @@ from game_object.landscapes.stone import Stone
 from game_object.landscapes.ground import Ground
 from game_object.landscapes.water import Water
 from game_object.landscapes.palm import Palm
+from game_object.landscapes.bonefire import Bonefire
 from game_object.traps.cactus import Cactus
 
 from config import WINDOW_WIDTH
@@ -67,6 +68,8 @@ class GameLogic(Game):
                     self.obstacles.add(Water(x, y))
                 elif obj == '+':
                     self.obstacles.add(Palm(x, y))
+                elif obj == '^':
+                    self.obstacles.add(Bonefire(x, y))
                 elif obj == '*':
                     self.create_cactus(x, y)
                 elif obj == 'P':
