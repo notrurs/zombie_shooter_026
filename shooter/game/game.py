@@ -32,7 +32,6 @@ class Game:
         self.enemies = pygame.sprite.Group()
         self.landscapes = pygame.sprite.Group()
         self.obstacles = pygame.sprite.Group()
-        self.traps = pygame.sprite.Group()
         self.clock = pygame.time.Clock()
         self.keydown_handlers = defaultdict(list)  # {'KEY_W': [Player.handle_keydown, Player2.handle_keydown], 'KEY_S': [Player.handle_keydown]} Player.handle_keydown()
         self.keyup_handlers = defaultdict(list)
@@ -58,7 +57,7 @@ class Game:
         """Главный игровой метод. Содержит бесконечный цикл, внутри которого работает всё."""
         while True:
             self.handle_events()
-            self.game_objects = [*self.landscapes, *self.obstacles, *self.traps, *self.enemies, *self.player_objects, *self.player_bullets]
+            self.game_objects = [*self.landscapes, *self.obstacles, *self.enemies, *self.player_objects, *self.player_bullets]
 
             self.surface.fill(self.background)
             self.update()
