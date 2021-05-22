@@ -6,6 +6,7 @@ from game_object.entity.bullet import Bullet
 from game_object.entity.zombie import Zombie
 from game_object.landscapes.stone import Stone
 from game_object.landscapes.ground import Ground
+from game_object.landscapes.water import Water
 from game_object.landscapes.palm import Palm
 from game_object.traps.cactus import Cactus
 
@@ -62,6 +63,8 @@ class GameLogic(Game):
                 self.landscapes.add(Ground(x, y))
                 if obj == '-':
                     self.obstacles.add(Stone(x, y))
+                elif obj == 'w':
+                    self.obstacles.add(Water(x, y))
                 elif obj == '+':
                     self.obstacles.add(Palm(x, y))
                 elif obj == '*':
@@ -81,7 +84,7 @@ class GameLogic(Game):
         # Список со всеми клавишами на клавиатуре, которые могут быть задействованы игроком
         keys = [pygame.K_w, pygame.K_a, pygame.K_s, pygame.K_d]
 
-        # Список со всеми событиями мышки, которые могут быть задейстованы игроком
+        # Список со всеми событиями мышки, которые могут быть задействованы игроком
         mouse_events = [pygame.MOUSEMOTION, pygame.MOUSEBUTTONDOWN, pygame.MOUSEBUTTONUP]
 
         # Добавляем все клавиши в соответствующие словари
@@ -158,7 +161,13 @@ class GameLogic(Game):
 
     def handle_bullets_with_obstacles_collision(self):
         """Обработчик соприкосновения пули с препятствием"""
-        pygame.sprite.groupcollide(self.player_bullets, self.obstacles, True, False)
+        # pygame.sprite.groupcollide(self.player_bullets, self.obstacles, True, False)
+
+        collide_dict = pygame.sprite.groupcollide(self.player_bullets, self.obstacles, False, False)
+        for bullet, obstacles in collide_dict.items():
+            for obstacle in obstacles:
+                if not isinstance(obstacle, Water):
+                    bullet.kill()
 
     def handle_enemy_with_obstacle_collision(self):
         """Обработчик соприкосновения врага с препятствием"""
