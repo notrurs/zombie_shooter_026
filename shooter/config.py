@@ -38,5 +38,10 @@ LANDSCAPE_GROUND = _IMAGES_DIR / 'ground.png'
 LANDSCAPE_STONE = _IMAGES_DIR / 'stone.png'
 LANDSCAPE_PALM = _IMAGES_DIR / 'palm-1.png'
 
+# Настройка объектов ловушек
+CACTUS_IMG = _IMAGES_DIR / 'cactus.png'
+CACTUS_ATTACK_DELAY = 1
+CACTUS_SPIKE_DAMAGE = 10
+
 # Список уровней
 LEVEL_1 = _LEVELS_DIR / 'level.txt'
