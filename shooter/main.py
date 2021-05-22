@@ -148,7 +148,13 @@ class GameLogic(Game):
 
     def handle_bullets_with_obstacles_collision(self):
         """Обработчик соприкосновения пули с препятствием"""
-        pygame.sprite.groupcollide(self.player_bullets, self.obstacles, True, False)
+        # pygame.sprite.groupcollide(self.player_bullets, self.obstacles, True, False)
+
+        collide_dict = pygame.sprite.groupcollide(self.player_bullets, self.obstacles, False, False)
+        for bullet, obstacles in collide_dict.items():
+            for obstacle in obstacles:
+                if True:  # Пока не разобрался, как выделить спрайты воды (Water), чтобы пули пролетали над водой
+                    bullet.kill()
 
     def handle_enemy_with_obstacle_collision(self):
         """Обработчик соприкосновения врага с препятствием"""
