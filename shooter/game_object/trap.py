@@ -1,16 +1,12 @@
 from time import monotonic
 
-import pygame
+from .landscape import Landscape
 
 
-class Trap(pygame.sprite.Sprite):
+class Trap(Landscape):
     """Класс объекта ловушек"""
     def __init__(self, x, y, image, damage, attack_delay):
-        super().__init__()
-        self.image = pygame.image.load(image)
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
+        super().__init__(x, y, image)
         self.damage = damage
         self.attack_delay = attack_delay
         self.last_attack_time = monotonic()
