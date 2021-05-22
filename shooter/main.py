@@ -26,10 +26,10 @@ from config import ZOMBIE_AGR_RANGE
 from config import ZOMBIE_HEALTH
 from config import ZOMBIE_DAMAGE
 from config import ZOMBIE_ATTACK_DELAY
-from config import LEVEL_1
 from config import CACTUS_IMG
 from config import CACTUS_SPIKE_DAMAGE
 from config import CACTUS_ATTACK_DELAY
+from config import LEVEL_1
 
 
 class GameLogic(Game):
